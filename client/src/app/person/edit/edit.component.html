@@ -1,0 +1,29 @@
+<h3>Edit Person</h3>
+<div *ngIf="getSinglePerson$ | async as data">
+  <div *ngIf="data.person as person">
+    <form #editPersonForm="ngForm" (ngSubmit)="onFormSubmit(editPersonForm)">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input [(ngModel)]="person.name" required type="text" class="form-control" name="name" id="name" placeholder="Enter Name">
+      </div>
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input [(ngModel)]="person.age" name="age" required type="number" class="form-control" id="age" placeholder="Enter Age">
+      </div>
+      <div class="form-group">
+        <label for="gender">Gender</label>
+        <select [(ngModel)]="person.gender" name="gender" required class="form-control" id="gender">
+          <option value="M">Male</option>
+          <option value="F">Female</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="mobno">Mobile Number</label>
+        <input [(ngModel)]="person.mobno" name="mobno" required type="number" class="form-control" id="mobno" placeholder="Enter Mobile Number">
+      </div>
+      <button [disabled]="!editPersonForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
+      <button (click)="onDelete(person._id)" type="button" class="btn btn-danger">Delete</button>
+    </form>
+  </div>
+  <div *ngIf="data.error">Person not present</div>
+</div>

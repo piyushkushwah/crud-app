@@ -1,0 +1,27 @@
+<h3>All Persons</h3>
+
+<div *ngIf="allPerson$ | async as allPerson">
+  <table *ngIf="allPerson.persons.length !== 0" class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Mobile Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let person of allPerson.persons" (click)="onPersonClick(person._id)">
+        <td>{{person.name}}</td>
+        <td>{{person.age}}</td>
+        <td>{{person.gender}}</td>
+        <td>{{person.mobno}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6 *ngIf="allPerson.persons.length === 0">No Record Found</h6>
+</div>
+
+<div *ngIf="!(allPerson$ | async)">
+  <h6>Loading...</h6>
+</div>
